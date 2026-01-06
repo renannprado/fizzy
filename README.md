@@ -13,6 +13,17 @@ You can find the details of how to do a Docker-based deployment in our [Docker d
 If you want more flexibility to customize your Fizzy installation by changing its code, and deploy those changes to your server, then we recommend you deploy Fizzy with Kamal. You can find a complete walkthrough of doing that in our [Kamal deployment guide](docs/kamal-deployment.md).
 
 
+### Demo
+
+If you'd like to run Fizzy on your own machine to try it out, you can use the provided [`docker-compose.demo.yml file`](docker-compose.demo.yml).
+
+```shell
+docker compose -f ./docker-compose.demo.yaml up
+```
+
+Then just access Fizzy at `http://localhost` and receive the activation code via the mock SMTP server running at `http://localhost:8025`.
+
+
 ## Development
 
 You are welcome -- and encouraged -- to modify Fizzy to your liking.

@@ -1,0 +1,34 @@
+services:
+  fizzy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - SECRET_KEY_BASE=changeme
+      - DISABLE_SSL=true
+      - MAILER_FROM_ADDRESS=test@example.com
+      - SMTP_ADDRESS=mailpit
+      - SMTP_PORT=1025
+      - SMTP_USERNAME=admin
+      - SMTP_PASSWORD=admin
+      - SMTP_TLS=false
+    volumes:
+      - fizzy:/rails/storage
+  mailpit:
+    image: axllent/mailpit:v1.28.1@sha256:ff948a98fd2d16d717f7fd8f2a4ea66a8735d67ad3f7996497670b0fbf1f9797
+    ports:
+      - "8025:8025" # Web UI
+      - "1025:1025" # SMTP Port
+    environment:
+      - MP_SMTP_AUTH=admin:admin
+      - MP_SMTP_AUTH_ALLOW_INSECURE=true
+      - MP_MAX_MESSAGES=500
+      - MP_DATABASE=/data/mailpit.db
+    volumes:
+      - mailpit_data:/data
+
+volumes:
+  fizzy:
+  mailpit_data:
